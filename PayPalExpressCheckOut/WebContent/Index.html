@@ -18,7 +18,7 @@
       <br>
       		Last Name: <input type="text" id="LastName"  value="Pawar"/>
       <br>
-   	  		Transaction Amount: <input type="text" id="TransactionAmount"  value="1"/>
+   	  		Transaction Amount: <input type="text" id="TransactionAmount"  value="10.00"/>
       <br>
       		Transaction Currency: <input type="text" id="Currency"  value="USD"/>
       <br>
@@ -54,6 +54,8 @@
     // Form values are taken
     var firstname = document.getElementById("FirstName").value;
     var lastname = document.getElementById("LastName").value;
+    var name = firstname.concat(" ");
+    var fullname = name.concat(lastname);
     var transactionamt = document.getElementById("TransactionAmount").value;
     var currency = document.getElementById("Currency").value;
     var orderid = document.getElementById("OrderID").value;
@@ -66,6 +68,7 @@
     var postalCode = document.getElementById("PostalCode").value;
     var phoneNumber = document.getElementById("PhoneNum").value;
     
+   
     
     //REST call to get the token
     var xhttp = new XMLHttpRequest();
@@ -114,20 +117,20 @@
         payment: function () {
           return paypalCheckoutInstance.createPayment({
             flow: 'checkout', // Required
-            amount: 10.00, // Required
-            currency: 'USD', // Required
+            amount: transactionamt, //10.00, // Required
+            currency: currency, //'USD', // Required
             locale: 'en_US',
             enableShippingAddress: true,
             shippingAddressEditable: false,
             shippingAddressOverride: {
-              recipientName: 'Asawari Pawar',
-              line1: 'Indian Bank Society',
-              line2: 'Survey No-548, Plot No-51&52',
-              city: 'Pune',
-              countryCode: 'IN',
-              postalCode: '411037',
-              state: 'Maharashtra',
-              phone: '9423574802'
+              recipientName: fullname, //'Asawari Pawar',
+              line1: line1, //'Indian Bank Society',
+              line2: line2, //'Survey No-548, Plot No-51&52',
+              city: city, //'Pune',
+              countryCode: countryCode, //'IN',
+              postalCode: postalCode, //'411037',
+              state: state, //'Maharashtra',
+              phone: phoneNumber //'9423574802'
               
             }
           });
@@ -146,7 +149,7 @@
                 var xhttp1 = new XMLHttpRequest();
             	xhttp1.open("POST", "http://localhost:8080/PayPalExpressCheckOut/rest/braintreecontroller/transaction", true);
             	xhttp1.setRequestHeader("Content-type", "application/json");
-            	xhttp1.send(JSON.stringify({ transactionamount: "10.00", currency: "USD", paymentnonce: paymentnonce, orderid: document.getElementById("OrderID").value, orderdescription: document.getElementById("OrderDesc").value, firstname: document.getElementById("FirstName").value, lastname: document.getElementById("LastName").value, companyname: "Rey*ansh", line1address: document.getElementById("Line1").value, line2address: document.getElementById("Line2").value, city: document.getElementById("City").value, state: document.getElementById("State").value, postalcode: document.getElementById("PostalCode").value, countrycode: document.getElementById("CountryCode").value }));
+            	xhttp1.send(JSON.stringify({ transactionamount: document.getElementById("TransactionAmount").value, currency: document.getElementById("Currency").value, paymentnonce: paymentnonce, orderid: document.getElementById("OrderID").value, orderdescription: document.getElementById("OrderDesc").value, firstname: document.getElementById("FirstName").value, lastname: document.getElementById("LastName").value, companyname: "Rey*ansh", line1address: document.getElementById("Line1").value, line2address: document.getElementById("Line2").value, city: document.getElementById("City").value, state: document.getElementById("State").value, postalcode: document.getElementById("PostalCode").value, countrycode: document.getElementById("CountryCode").value }));
             	var transactionresponse = xhttp.responseText;
             	//alert(transactionresponse);
             	
