@@ -1,0 +1,146 @@
+{
+	"variables": [],
+	"info": {
+		"name": "PayPal",
+		"_postman_id": "d95ab5a4-5cfc-b70f-0b38-cd15d00211e2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.sandbox.paypal.com/v1/oauth2/token",
+			"request": {
+				"url": "https://api.sandbox.paypal.com/v1/oauth2/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic QVQwcGx3cUNIdXF0LWd4YldIeENuODdqSUl1bGRCV2ZXQXVCTDBXeE16akJFTGpnb2hsWVhQYTdfWXJmODZDYWlXVUFUS0NLRVJCXzZhYmQ6RU9LUEk4aDMyVzZsbEpTeWxuMW11V1FzTG53QmFqMnpTdFRRUV9rdWpaWHIydXJUX1N5QWo5bzJmNmhrTEVSX1lqN1FKaVFZVV9NWTlxeDg=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Access Token generation"
+			},
+			"response": [
+				{
+					"id": "f54c1569-306d-45e9-8386-7b603f422f64",
+					"name": "PayPal-Token",
+					"originalRequest": {
+						"url": "https://api.sandbox.paypal.com/v1/oauth2/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"name": "Authorization",
+								"value": "Basic QVQwcGx3cUNIdXF0LWd4YldIeENuODdqSUl1bGRCV2ZXQXVCTDBXeE16akJFTGpnb2hsWVhQYTdfWXJmODZDYWlXVUFUS0NLRVJCXzZhYmQ6RU9LUEk4aDMyVzZsbEpTeWxuMW11V1FzTG53QmFqMnpTdFRRUV9rdWpaWHIydXJUX1N5QWo5bzJmNmhrTEVSX1lqN1FKaVFZVV9NWTlxeDg=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"description": "",
+									"type": "text"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "Access-Control-Expose-Headers",
+							"key": "Access-Control-Expose-Headers",
+							"value": "False",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "373",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Mon, 03 Jul 2017 18:30:29 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Vary",
+							"key": "Vary",
+							"value": "Authorization",
+							"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+						},
+						{
+							"name": "X-PAYPAL-TOKEN-SERVICE",
+							"key": "X-PAYPAL-TOKEN-SERVICE",
+							"value": "IAAS",
+							"description": "Custom header"
+						},
+						{
+							"name": "paypal-debug-id",
+							"key": "paypal-debug-id",
+							"value": "ee565f0b4e435, ee565f0b4e435",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"responseTime": 5978,
+					"body": "{\"scope\":\"https://api.paypal.com/v1/payments/.* https://uri.paypal.com/services/applications/webhooks openid\",\"nonce\":\"2017-07-03T18:30:29Z4FLKFxiq2jT4Afn8LkgQTC_TRdqs_ZveM9JqayMnOA0\",\"access_token\":\"A21AAFNZw2xpkEDn1BNZdzvPsOuFhvVF2yT5P3CyNa_exnCi7dim_bzg-nsjTwNB2T-LTQEgUME8y9zKSxtBDjvyNQTAq0aYg\",\"token_type\":\"Bearer\",\"app_id\":\"APP-80W284485P519543T\",\"expires_in\":32398}"
+				}
+			]
+		}
+	]
+}

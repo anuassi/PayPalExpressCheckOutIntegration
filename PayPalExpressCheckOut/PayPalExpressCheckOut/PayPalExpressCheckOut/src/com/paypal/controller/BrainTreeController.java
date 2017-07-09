@@ -61,11 +61,8 @@ public class BrainTreeController {
 	public Response createTransaction(@Context HttpHeaders headers, String payload) {
 		//System.out.println("You are in createTransaction");
 		JSONObject jsonResponse = new JSONObject(payload);
-		String responsevalue = new CheckOutExpress().createTransactionRequest(jsonResponse);
-		
-		if(!responsevalue.isEmpty()){
-			System.out.println("Response inside not empty:" +responsevalue);
-			String response = "{ \"transactionId\":" +"\""+responsevalue.trim()+"\" }";
+		String response = new CheckOutExpress().createTransactionRequest(jsonResponse);
+		if(!response.isEmpty()){
 			JSONObject respObj = new JSONObject(response);
 			jsonResponse.put("ResponseStatus", "Success");
 			jsonResponse.put("ResponseMessage", respObj);
@@ -73,7 +70,6 @@ public class BrainTreeController {
 			return Response.status(200).entity(response).build();
 		}
 		else {
-			String response = "";
 			jsonResponse.put("ResponseStatus", "Failure");
 			//jsonResponse.put("ResponseMessage", respObj);
 			jsonResponse.put("STATUS", "500");

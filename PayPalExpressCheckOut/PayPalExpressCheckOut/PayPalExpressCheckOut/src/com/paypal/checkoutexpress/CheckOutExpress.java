@@ -18,10 +18,7 @@ public class CheckOutExpress {
 	//private String paymentnonce = "";
 	public CheckOutExpress(){
 	
-		//String accessToken = "access_token$sandbox$2kw6dtz5cpp94kc7$e0aee25a87e1fedc1dd6d3d5b501d6c2";
-		//String accessToken = "access_token$sandbox$9nnpx7tvcfp3vhrh$f93d8f54bdd312f8e2674ca5925142e3";
-		//String accessToken = "access_token$sandbox$djy5pqy3xgt59fzb$a8cb942d5f00a33e253adba707aecf19";
-		String accessToken = "access_token$sandbox$mstj22cc2h3rvzf4$229b31814b541e039a1d5216b7bbb359";
+		String accessToken = "access_token$sandbox$2kw6dtz5cpp94kc7$e0aee25a87e1fedc1dd6d3d5b501d6c2";
 		this.gateway = new BraintreeGateway(accessToken);
 		if(gateway != null)
 			System.out.println("Gateway Object:" +gateway.toString());
@@ -42,8 +39,6 @@ public class CheckOutExpress {
 		
 		
 		System.out.print("nonce:" +transReq.getString("paymentnonce") +"\n");
-		System.out.print("trasnscationAmount:" +transReq.getString("transactionamount") +"\n");
-		System.out.print("Currency:" +transReq.getString("currency") +"\n");
 		System.out.print("orderid:" +transReq.getString("orderid") +"\n");
 		System.out.print("orderDesc:" +transReq.getString("orderdescription") +"\n");
 		System.out.print("CountryCode:" +transReq.getString("countrycode") +"\n");
@@ -59,15 +54,14 @@ public class CheckOutExpress {
 		System.out.println("Starting to create request object!!");
 		TransactionRequest request = new TransactionRequest();
 		
-				//BigDecimal amt = new BigDecimal(10.00);
-				BigDecimal amt = new BigDecimal(transReq.getString("transactionamount"));
+				BigDecimal amt = new BigDecimal(10.00);
 				request.amount(amt); //transactionamount
-			    request.merchantAccountId(transReq.getString("currency")); //currency
+			    request.merchantAccountId("USD"); //currency
 			    request.paymentMethodNonce(transReq.getString("paymentnonce"));
 			    request.orderId(transReq.getString("orderid"));
-			 //   request.descriptor().
-			   //   name(transReq.getString("orderdescription")).
-			     // done();
+			    request.descriptor().
+			      name(transReq.getString("orderdescription")).
+			      done();
 			    
 			    request.shippingAddress()
 			        .firstName(transReq.getString("firstname"))
@@ -89,7 +83,7 @@ public class CheckOutExpress {
 			   request.options().submitForSettlement(true);
 			   
 			   
-			System.out.println("Transaction Request is created!!");      
+			//System.out.println("Transaction Request is created!!");      
 			Result<Transaction> saleResult = gateway.transaction().sale(request);
 			if (saleResult.isSuccess()) {
 				  Transaction transaction = saleResult.getTarget();

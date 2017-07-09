@@ -24,8 +24,8 @@
       <br>
       		Order ID: <input type="text" id="OrderID" value="XYX123"/>
       <br>
-      		Order Description: <input type="text" id="OrderDesc"  value="IPhone6s*M"/>
-      <br>
+      	<!--	Order Description: <input type="text" id="OrderDesc"  value="IPhone6s*M"/>
+     // <br> -->
       		
       <h2> Shipping Details </h2>
       
@@ -59,7 +59,7 @@
     var transactionamt = document.getElementById("TransactionAmount").value;
     var currency = document.getElementById("Currency").value;
     var orderid = document.getElementById("OrderID").value;
-    var orderDesc = document.getElementById("OrderDesc").value;
+   // var orderDesc = document.getElementById("OrderDesc").value;
     var line1 = document.getElementById("Line1").value;
     var line2 = document.getElementById("Line2").value;
     var city = document.getElementById("City").value;
@@ -72,7 +72,7 @@
     
     //REST call to get the token
     var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", "http://ec2-13-126-132-149.ap-south-1.compute.amazonaws.com:8080/PayPalExpressCheckOut/rest/braintreecontroller/clienttoken", false);
+	xhttp.open("GET", "http://localhost:8080/PayPalExpressCheckOut/rest/braintreecontroller/clienttoken", false);
 	xhttp.setRequestHeader("Content-type", "application/json");
 	xhttp.send();
 	//var response = JSON.parse(xhttp.responseText);
@@ -147,12 +147,19 @@
               //document.getElementById('checkoutfrm').submit();
                 var paymentnonce = payload.nonce;
                 var xhttp1 = new XMLHttpRequest();
-            	xhttp1.open("POST", "http://ec2-13-126-132-149.ap-south-1.compute.amazonaws.com:8080/PayPalExpressCheckOut/rest/braintreecontroller/transaction", true);
+            	xhttp1.open("POST", "http://localhost:8080/PayPalExpressCheckOut/rest/braintreecontroller/transaction", false);
             	xhttp1.setRequestHeader("Content-type", "application/json");
-            	xhttp1.send(JSON.stringify({ transactionamount: document.getElementById("TransactionAmount").value, currency: document.getElementById("Currency").value, paymentnonce: paymentnonce, orderid: document.getElementById("OrderID").value, orderdescription: document.getElementById("OrderDesc").value, firstname: document.getElementById("FirstName").value, lastname: document.getElementById("LastName").value, companyname: "Rey*ansh", line1address: document.getElementById("Line1").value, line2address: document.getElementById("Line2").value, city: document.getElementById("City").value, state: document.getElementById("State").value, postalcode: document.getElementById("PostalCode").value, countrycode: document.getElementById("CountryCode").value }));
-            	var transactionresponse = xhttp.responseText;
-            	//alert(transactionresponse);
-            	
+            	xhttp1.send(JSON.stringify({ transactionamount: document.getElementById("TransactionAmount").value, currency: document.getElementById("Currency").value, paymentnonce: paymentnonce, orderid: document.getElementById("OrderID").value, orderdescription: "Desc not required", firstname: document.getElementById("FirstName").value, lastname: document.getElementById("LastName").value, companyname: "Rey*ansh", line1address: document.getElementById("Line1").value, line2address: document.getElementById("Line2").value, city: document.getElementById("City").value, state: document.getElementById("State").value, postalcode: document.getElementById("PostalCode").value, countrycode: document.getElementById("CountryCode").value }));
+            	var transactionresponse = xhttp1.responseText;
+            	if(transactionresponse===""){
+            		alert("Transaction Failed. OrderID cannot be repeated");
+            	}
+            	else{
+            		var str = "Successful Transaction, Id is:";
+            		var leng = transactionresponse.length;
+            		var transresponse = transactionresponse.slice(19, (leng-3));
+            		alert(str.concat(transresponse));
+            	}
             });
           
         },
